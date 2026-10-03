@@ -15,6 +15,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # ----------------------------------------------------------------------
 # Security
 # ----------------------------------------------------------------------
@@ -24,16 +25,14 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-key")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "kuniya-learning-management-system-f.vercel.app",
-    "kuniya-learning-management-system-9.vercel.app",
+    ".vercel.app",
     "learning-management-system-nalanda-open-l069.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://kuniya-learning-management-system-f.vercel.app",
-    "https://kuniya-learning-management-system-9.vercel.app",
+    "https://*.vercel.app",
     "https://learning-management-system-nalanda-open-l069.onrender.com",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
@@ -128,7 +127,7 @@ DATABASES = {
 
 
 # Use DATABASE_URL if provided
-# This is useful for production hosting such as Render.
+# This is useful for production hosting such as Vercel/Render.
 if os.getenv("DATABASE_URL"):
     DATABASES["default"] = dj_database_url.parse(
         os.getenv("DATABASE_URL")
