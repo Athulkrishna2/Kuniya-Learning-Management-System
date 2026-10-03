@@ -23,11 +23,15 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = [
+    "kuniya-learning-management-system-9.vercel.app",
     "learning-management-system-nalanda-open-l069.onrender.com",
     "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
 ]
+
 CSRF_TRUSTED_ORIGINS = [
+    "https://kuniya-learning-management-system-9.vercel.app",
+    "https://learning-management-system-nalanda-open-l069.onrender.com",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
 ]
