@@ -22,7 +22,9 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 ALLOWED_HOSTS = [
+    "kuniya-learning-management-system-f.vercel.app",
     "kuniya-learning-management-system-9.vercel.app",
     "learning-management-system-nalanda-open-l069.onrender.com",
     "localhost",
@@ -30,6 +32,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://kuniya-learning-management-system-f.vercel.app",
     "https://kuniya-learning-management-system-9.vercel.app",
     "https://learning-management-system-nalanda-open-l069.onrender.com",
     "http://localhost:8000",
@@ -239,4 +242,3 @@ ALLOWED_MATERIAL_EXTENSIONS = [
 PREVIEW_IMAGE_SIZE = (300, 300)
 
 PDF_PREVIEW_QUALITY = 200
-
