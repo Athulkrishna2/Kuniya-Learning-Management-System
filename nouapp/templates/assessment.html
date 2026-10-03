@@ -1,0 +1,326 @@
+{% extends 'parent.html' %}
+
+{% block body %}
+
+<style>
+
+.assessment-page {
+    min-height: 80vh;
+    padding: 60px 20px;
+    background: #f5f7fb;
+}
+
+.assessment-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.assessment-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.assessment-header h1 {
+    color: #060666;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.assessment-header p {
+    color: #666;
+}
+
+.result-box {
+    background: #e8f5e9;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #c8e6c9;
+}
+
+.result-box h2 {
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.result-box h3 {
+    color: #060666;
+    font-size: 24px;
+}
+
+.result-box p {
+    color: #555;
+}
+
+.question-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.question-card h3 {
+    color: #060666;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: block;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #f0f6ff;
+    border-color: #0056b3;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #0056b3, #060666);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}
+
+</style>
+
+<section class="assessment-page">
+
+```
+<div class="assessment-container">
+
+    <div class="assessment-header">
+
+        <h1>✍️ Assessment Tool</h1>
+
+        <p>
+            Test your knowledge with this short assessment.
+        </p>
+
+    </div>
+
+
+    <!-- SCORE RESULT -->
+
+    {% if score is not None %}
+
+    <div class="result-box">
+
+        <h2>🎉 Assessment Completed!</h2>
+
+        <h3>Your Score: {{ score }} / 5</h3>
+
+        {% if score == 5 %}
+
+            <p>Excellent! 🌟</p>
+
+        {% elif score >= 3 %}
+
+            <p>Good job! 👍</p>
+
+        {% else %}
+
+            <p>Keep practicing! 📚</p>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ASSESSMENT FORM -->
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <!-- Question 1 -->
+
+        <div class="question-card">
+
+            <h3>
+                1. What does HTML stand for?
+            </h3>
+
+            <label class="option">
+                <input type="radio" name="q1" value="a">
+                Hyper Text Markup Language
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q1" value="b">
+                High Text Machine Language
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q1" value="c">
+                Hyperlink Text Management Language
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q1" value="d">
+                Home Tool Markup Language
+            </label>
+
+        </div>
+
+
+        <!-- Question 2 -->
+
+        <div class="question-card">
+
+            <h3>
+                2. Which language is mainly used for web page styling?
+            </h3>
+
+            <label class="option">
+                <input type="radio" name="q2" value="a">
+                Python
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q2" value="b">
+                CSS
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q2" value="c">
+                Java
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q2" value="d">
+                C
+            </label>
+
+        </div>
+
+
+        <!-- Question 3 -->
+
+        <div class="question-card">
+
+            <h3>
+                3. Which language is commonly used to create dynamic web applications?
+            </h3>
+
+            <label class="option">
+                <input type="radio" name="q3" value="a">
+                PHP
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q3" value="b">
+                HTML
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q3" value="c">
+                CSS
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q3" value="d">
+                XML
+            </label>
+
+        </div>
+
+
+        <!-- Question 4 -->
+
+        <div class="question-card">
+
+            <h3>
+                4. Which database is used in this LMS project?
+            </h3>
+
+            <label class="option">
+                <input type="radio" name="q4" value="a">
+                MongoDB
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q4" value="b">
+                MySQL
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q4" value="c">
+                Oracle
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q4" value="d">
+                SQLite
+            </label>
+
+        </div>
+
+
+        <!-- Question 5 -->
+
+        <div class="question-card">
+
+            <h3>
+                5. What is Django?
+            </h3>
+
+            <label class="option">
+                <input type="radio" name="q5" value="a">
+                A programming language
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q5" value="b">
+                A Python web framework
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q5" value="c">
+                A database
+            </label>
+
+            <label class="option">
+                <input type="radio" name="q5" value="d">
+                An operating system
+            </label>
+
+        </div>
+
+
+        <!-- SUBMIT BUTTON -->
+
+        <button type="submit" class="submit-btn">
+            Submit Assessment
+        </button>
+
+    </form>
+
+</div>
+```
+
+</section>
+
+{% endblock %}

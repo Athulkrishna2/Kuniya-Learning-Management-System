@@ -1,0 +1,344 @@
+{% extends 'parent.html' %}
+{% load static %}
+
+{% block body %}
+
+<style>
+
+.library-page {
+    min-height: 80vh;
+    padding: 60px 0;
+    background: #f5f7fb;
+}
+
+.library-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.library-header h1 {
+    color: #060666;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.library-header p {
+    color: #666;
+    font-size: 1.05rem;
+}
+
+.library-search {
+    max-width: 600px;
+    margin: 25px auto 0;
+    display: flex;
+    background: white;
+    border-radius: 30px;
+    padding: 5px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.library-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-size: 15px;
+}
+
+.library-search button {
+    border: none;
+    background: linear-gradient(135deg, #0056b3, #060666);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+.library-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.book-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+
+.book-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 30px rgba(0,86,179,0.15);
+}
+
+.book-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0056b3, #060666);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.book-card h3 {
+    color: #060666;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.book-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.book-category {
+    display: inline-block;
+    background: #e8f1ff;
+    color: #0056b3;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.book-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.book-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.read-btn {
+    background: #0056b3;
+    color: white;
+}
+
+.download-btn {
+    background: #e8f1ff;
+    color: #0056b3;
+}
+
+.book-btn:hover {
+    opacity: 0.85;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 40px;
+    padding: 11px 25px;
+    background: #060666;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-button:hover {
+    color: white;
+    background: #0056b3;
+}
+
+@media (max-width: 992px) {
+
+    .library-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .library-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .library-header h1 {
+        font-size: 2rem;
+    }
+
+    .library-search {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+}
+
+</style>
+
+
+<section class="library-page">
+
+    <div class="container">
+
+        <!-- Library Header -->
+
+        <div class="library-header">
+
+            <h1>
+                📚 E-Books Library
+            </h1>
+
+            <p>
+                Explore digital books and learning resources available in Kuniya LMS.
+            </p>
+
+            <!-- Search -->
+
+            <div class="library-search">
+
+                <input
+                    type="text"
+                    id="bookSearch"
+                    placeholder="Search books..."
+                    onkeyup="searchBooks()"
+                >
+
+                <button type="button">
+                    🔍 Search
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Books from Database -->
+
+        <div class="library-grid" id="bookList">
+
+            {% for book in books %}
+
+            <div class="book-card">
+
+                <div class="book-icon">
+                    📚
+                </div>
+
+                <span class="book-category">
+                    {{ book.category|default:"Learning" }}
+                </span>
+
+                <h3>
+                    {{ book.title }}
+                </h3>
+
+                <p>
+                    {{ book.description }}
+                </p>
+
+                <div class="book-buttons">
+
+                    <!-- Read Book -->
+
+                    <a
+                        href="{{ book.file.url }}"
+                        target="_blank"
+                        class="book-btn read-btn"
+                    >
+                        📖 Read
+                    </a>
+
+
+                    <!-- Download Book -->
+
+                    <a
+                        href="{{ book.file.url }}"
+                        download
+                        class="book-btn download-btn"
+                    >
+                        📥 Download
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div style="text-align:center; width:100%;">
+
+                <h3>No books available.</h3>
+
+                <p>
+                    Please check the Django Admin and upload a book.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Back to Home -->
+
+        <div class="text-center">
+
+            <a
+                href="{% url 'nouapp:index' %}"
+                class="back-button"
+            >
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+function searchBooks() {
+
+    const searchText =
+        document.getElementById("bookSearch")
+        .value
+        .toLowerCase();
+
+    const books =
+        document.querySelectorAll(".book-card");
+
+    books.forEach(function(book) {
+
+        const text =
+            book.innerText.toLowerCase();
+
+        if (text.includes(searchText)) {
+
+            book.style.display = "";
+
+        } else {
+
+            book.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+{% endblock %}

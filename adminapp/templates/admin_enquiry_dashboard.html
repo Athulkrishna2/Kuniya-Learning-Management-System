@@ -1,15 +1,16 @@
+```html
 {% extends 'adminhome.html' %}
 
 {% block body %}
+
 <style>
-    /* Professional Color Scheme */
     .admin-dashboard-container {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         padding: 40px 0;
         margin: -20px;
     }
-    
+
     .page-title {
         color: #ffffff;
         font-weight: 700;
@@ -17,63 +18,33 @@
         margin-bottom: 30px;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
-    /* Stats Cards */
+
     .stats-card {
         background: #ffffff;
         border-radius: 12px;
         border: none;
-        transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
-    
-    .stats-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    
+
     .stats-card .card-body {
-        padding: 30px 20px;
+        padding: 25px 20px;
     }
-    
+
     .stats-card h5 {
         font-size: 14px;
         font-weight: 600;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         color: #718096;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
-    
+
     .stats-card h2 {
-        font-size: 42px;
+        font-size: 36px;
         font-weight: 700;
         margin: 0;
     }
-    
-    .stats-card h2.text-dark {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    .stats-card h2.text-warning {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    .stats-card h2.text-success {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    /* Main Card */
+
     .main-card {
         background: #ffffff;
         border-radius: 16px;
@@ -81,11 +52,11 @@
         border: none;
         overflow: hidden;
     }
-    
+
     .main-card .card-body {
         padding: 32px;
     }
-    
+
     .card-title {
         color: #2d3748;
         font-weight: 700;
@@ -94,229 +65,539 @@
         border-bottom: 3px solid #667eea;
         padding-bottom: 12px;
     }
-    
-    /* Table Styling */
+
+    /* Filters */
+
+    .filter-box {
+        background: #f7fafc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    .filter-box label {
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 6px;
+    }
+
+    .filter-box .form-control {
+        border-radius: 6px;
+        border: 1px solid #cbd5e0;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: #ffffff;
+        font-weight: 600;
+        border-radius: 6px;
+    }
+
+    .btn-primary:hover {
+        color: #ffffff;
+    }
+
+    .btn-secondary {
+        border-radius: 6px;
+    }
+
+    /* Table */
+
     .table-responsive {
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
-    
+
     .table {
         margin-bottom: 0;
     }
-    
+
     .table thead {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
-    
+
     .table thead th {
         border: none;
         padding: 16px;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
         font-size: 13px;
         color: #ffffff;
     }
-    
+
     .table tbody td {
         padding: 16px;
         vertical-align: middle;
         color: #4a5568;
         border-bottom: 1px solid #e2e8f0;
-        background-color: #ffffff;
     }
-    
-    .table tbody tr {
-        transition: none;
-    }
-    
-    /* Remove all hover effects */
-    .table tbody tr:hover,
-    .table-hover tbody tr:hover,
-    .table-striped tbody tr:hover {
+
+    .table tbody tr:hover {
         background-color: inherit !important;
-        transform: none !important;
     }
-    
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f7fafc;
-    }
-    
-    .table-striped tbody tr:nth-of-type(odd):hover {
-        background-color: #f7fafc !important;
-    }
-    
-    .table-striped tbody tr:nth-of-type(even):hover {
-        background-color: #ffffff !important;
-    }
-    
-    /* Badge Styling */
+
+    /* Badges */
+
     .badge {
-        padding: 6px 14px;
+        padding: 6px 12px;
         font-size: 12px;
         font-weight: 600;
         border-radius: 6px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
-    
+
     .badge-low {
-        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-        color: #744210;
+        background: #e6fffa;
+        color: #285e61;
     }
-    
+
     .badge-medium {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        color: #ffffff;
+        background: #ebf8ff;
+        color: #2b6cb0;
     }
-    
+
     .badge-high {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        color: #ffffff;
+        background: #fff5f5;
+        color: #c53030;
     }
-    
+
+    .badge-pending {
+        background: #fefcbf;
+        color: #975a16;
+    }
+
+    .badge-in-progress {
+        background: #bee3f8;
+        color: #2c5282;
+    }
+
+    .badge-resolved {
+        background: #c6f6d5;
+        color: #276749;
+    }
+
+    .badge-closed {
+        background: #e2e8f0;
+        color: #4a5568;
+    }
+
     .badge-info {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: #667eea;
         color: #ffffff;
     }
-    
-    /* Button Styling */
-    .btn-primary {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border: none;
-        padding: 8px 20px;
-        font-weight: 600;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-        color: #ffffff;
-    }
-    
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
-        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        color: #ffffff;
-    }
-    
-    /* Empty State */
-    .text-center.text-muted {
-        color: #718096 !important;
+
+    .empty-state {
+        color: #718096;
         font-size: 16px;
-        padding: 40px 0;
+        padding: 40px 0 !important;
     }
-    
-    /* Responsive */
+
     @media (max-width: 768px) {
+
         .admin-dashboard-container {
             padding: 20px 10px;
         }
-        
+
         .page-title {
             font-size: 24px;
         }
-        
+
         .stats-card h2 {
-            font-size: 32px;
+            font-size: 30px;
         }
-        
+
         .main-card .card-body {
             padding: 20px;
         }
-        
+
         .table thead th,
         .table tbody td {
-            padding: 12px 8px;
+            padding: 10px 8px;
             font-size: 13px;
         }
     }
 </style>
 
+
 <div class="admin-dashboard-container">
+
     <div class="row">
         <div class="col-12">
-            <h3 class="page-title">Student Enquiry Dashboard</h3>
-            
-            <!-- Statistics Cards -->
+
+            <h3 class="page-title">
+                Student Enquiry Dashboard
+            </h3>
+
+
+            <!-- ================================================= -->
+            <!-- STATISTICS -->
+            <!-- ================================================= -->
+
             <div class="row mb-4">
-                <div class="col-md-4 mb-3 mb-md-0">
+
+                <!-- Total -->
+                <div class="col-md-3 mb-3">
                     <div class="card stats-card">
                         <div class="card-body text-center">
+
                             <h5>Total Enquiries</h5>
-                            <h2 class="text-dark">{{ total_enquiries }}</h2>
+
+                            <h2>
+                                {{ total_enquiries }}
+                            </h2>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3 mb-md-0">
+
+
+                <!-- Pending -->
+                <div class="col-md-3 mb-3">
                     <div class="card stats-card">
                         <div class="card-body text-center">
+
                             <h5>Pending</h5>
-                            <h2 class="text-warning">{{ pending_enquiries }}</h2>
+
+                            <h2>
+                                {{ pending_enquiries }}
+                            </h2>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+
+
+                <!-- In Progress -->
+                <div class="col-md-3 mb-3">
                     <div class="card stats-card">
                         <div class="card-body text-center">
-                            <h5>Resolved</h5>
-                            <h2 class="text-success">{{ resolved_enquiries }}</h2>
+
+                            <h5>In Progress</h5>
+
+                            <h2>
+                                {{ in_progress_enquiries }}
+                            </h2>
+
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Enquiries Table -->
-            <div class="card main-card">
-                <div class="card-body">
-                    <h5 class="card-title">All Enquiries</h5>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Subject</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for enquiry in enquiries %}
-                                <tr>
-                                    <td>{{ enquiry.id }}</td>
-                                    <td>{{ enquiry.name }}</td>
-                                    <td>{{ enquiry.subject }}</td>
-                                    <td>
-                                        <span class="badge badge-{{ enquiry.priority }}">
-                                            {{ enquiry.get_priority_display }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-info">
-                                            {{ enquiry.get_status_display }}
-                                        </span>
-                                    </td>
-                                    <td>{{ enquiry.created_at|date:"d M Y" }}</td>
-                                    <td>
-                                        <a href="{% url 'adminapp:admin_enquiry_detail' enquiry.id %}" 
-                                           class="btn btn-sm btn-primary">View</a>
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="7" class="text-center text-muted">No enquiries found</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+
+
+                <!-- Resolved -->
+                <div class="col-md-3 mb-3">
+                    <div class="card stats-card">
+                        <div class="card-body text-center">
+
+                            <h5>Resolved</h5>
+
+                            <h2>
+                                {{ resolved_enquiries }}
+                            </h2>
+
+                        </div>
                     </div>
                 </div>
+
             </div>
+
+
+            <!-- ================================================= -->
+            <!-- FILTERS -->
+            <!-- ================================================= -->
+
+            <div class="card main-card mb-4">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Filter Enquiries
+                    </h5>
+
+                    <div class="filter-box">
+
+                        <form method="GET">
+
+                            <div class="row">
+
+                                <!-- Status -->
+
+                                <div class="col-md-4 mb-3">
+
+                                    <label>
+                                        Status
+                                    </label>
+
+                                    <select
+                                        name="status"
+                                        class="form-control"
+                                    >
+
+                                        <option value="">
+                                            All Statuses
+                                        </option>
+
+                                        <option value="pending"
+                                            {% if current_status == 'pending' %}selected{% endif %}>
+                                            Pending
+                                        </option>
+
+                                        <option value="in_progress"
+                                            {% if current_status == 'in_progress' %}selected{% endif %}>
+                                            In Progress
+                                        </option>
+
+                                        <option value="resolved"
+                                            {% if current_status == 'resolved' %}selected{% endif %}>
+                                            Resolved
+                                        </option>
+
+                                        <option value="closed"
+                                            {% if current_status == 'closed' %}selected{% endif %}>
+                                            Closed
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Priority -->
+
+                                <div class="col-md-4 mb-3">
+
+                                    <label>
+                                        Priority
+                                    </label>
+
+                                    <select
+                                        name="priority"
+                                        class="form-control"
+                                    >
+
+                                        <option value="">
+                                            All Priorities
+                                        </option>
+
+                                        <option value="low"
+                                            {% if current_priority == 'low' %}selected{% endif %}>
+                                            Low
+                                        </option>
+
+                                        <option value="medium"
+                                            {% if current_priority == 'medium' %}selected{% endif %}>
+                                            Medium
+                                        </option>
+
+                                        <option value="high"
+                                            {% if current_priority == 'high' %}selected{% endif %}>
+                                            High
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Buttons -->
+
+                                <div class="col-md-4 mb-3 d-flex align-items-end">
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary mr-2"
+                                    >
+                                        Apply Filter
+                                    </button>
+
+                                    <a
+                                        href="{% url 'adminapp:admin_enquiry_dashboard' %}"
+                                        class="btn btn-secondary"
+                                    >
+                                        Clear
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- ENQUIRIES TABLE -->
+            <!-- ================================================= -->
+
+            <div class="card main-card">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        All Enquiries
+                    </h5>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-striped">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>ID</th>
+
+                                    <th>Name</th>
+
+                                    <th>Subject</th>
+
+                                    <th>Priority</th>
+
+                                    <th>Status</th>
+
+                                    <th>Date</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                {% for enquiry in enquiries %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ enquiry.id }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ enquiry.name }}
+                                    </td>
+
+
+                                    <td>
+                                        {{ enquiry.subject }}
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="badge badge-{{ enquiry.priority }}">
+
+                                            {{ enquiry.get_priority_display }}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if enquiry.status == 'pending' %}
+
+                                            <span class="badge badge-pending">
+                                                Pending
+                                            </span>
+
+                                        {% elif enquiry.status == 'in_progress' %}
+
+                                            <span class="badge badge-in-progress">
+                                                In Progress
+                                            </span>
+
+                                        {% elif enquiry.status == 'resolved' %}
+
+                                            <span class="badge badge-resolved">
+                                                Resolved
+                                            </span>
+
+                                        {% elif enquiry.status == 'closed' %}
+
+                                            <span class="badge badge-closed">
+                                                Closed
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="badge badge-info">
+                                                {{ enquiry.get_status_display }}
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        {% if enquiry.created_at %}
+
+                                            {{ enquiry.created_at|date:"d M Y" }}
+
+                                        {% else %}
+
+                                            {{ enquiry.enquirydate }}
+
+                                        {% endif %}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <a
+                                            href="{% url 'adminapp:admin_enquiry_detail' enquiry.id %}"
+                                            class="btn btn-sm btn-primary"
+                                        >
+                                            View
+                                        </a>
+
+                                    </td>
+
+                                </tr>
+
+
+                                {% empty %}
+
+                                <tr>
+
+                                    <td
+                                        colspan="7"
+                                        class="text-center empty-state"
+                                    >
+                                        No enquiries found.
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
+
 </div>
+
 {% endblock %}
+```

@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOU e-Gyan PORTAL</title>
+  <title>Kuniya Learning Management System</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
   <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -1157,13 +1157,13 @@
       <div class="contact-bar">
         <div class="contact-bar-container">
           <div class="contact-left">
-            <a href="tel:+917080102007" class="contact-item-inline">
+            <a href="tel:+917907638067" class="contact-item-inline">
               <i class="fa fa-phone"></i>
-              <span>+91 7080102007</span>
+              <span>+91 7907638067</span>
             </a>
             <a href="mailto:nouegyanhelp@gmail.com" class="contact-item-inline">
               <i class="fa fa-envelope"></i>
-              <span>nouegyanhelp@gmail.com</span>
+              <span>kuniyalms@gmail.com</span>
             </a>
           </div>
           <div class="contact-right">
@@ -1182,7 +1182,10 @@
       <nav class="navbar navbar-expand-lg main-navbar">
         <div class="container">
           <a class="navbar-brand" href="{% url 'nouapp:index' %}">
-            <img src="{% static 'images/reallogo.png' %}" alt="NOU e-Gyan Portal" class="navbar-logo" style="width:80px; height:70px; margin-right: 60px;""/>
+            <img src="{% static 'images/kuniya.png' %}"
+            alt="Kuniya Learning Management System"
+            class="navbar-logo"
+            style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-right:60px;">
           </a>
           <div class="button-nav">
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -1268,12 +1271,12 @@
               <span>Get connected with us on social networks:</span>
             </div>
             <div class="social-icons">
-              <a href="https://www.linkedin.com/in/shailjaverma18" class="social-icon" aria-label="LinkedIn"
+              <a href="https://www.linkedin.com/in/athul-k" class="social-icon" aria-label="LinkedIn"
                 title="Connect on LinkedIn" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-linkedin-in"></i>
               </a>
 
-              <a href="https://github.com/ShailjaVerma18" class="social-icon" aria-label="GitHub"
+              <a href="https://github.com/Athulkrishna2" class="social-icon" aria-label="GitHub"
                 title="Check out my GitHub" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-github"></i>
               </a>
@@ -1294,15 +1297,16 @@
             <!-- About Section -->
             <div class="text-start col-lg-4 col-md-6 mb-4">
               <a href="{% url 'nouapp:index' %}">
-                <img src="{% static 'images/reallogo.png' %}" alt="NOU Logo" class="footer-logo img-fluid d-block mb-2"
-                  style="height: auto; width: 100px" />
-              </a>
+              <img src="{% static 'images/kuniya.png' %}"
+              alt="Kuniya Learning Management System"
+              class="footer-logo img-fluid d-block mb-2"
+              style="width:100px; height:100px; border-radius:50%; object-fit:cover;" />
+</a>
               <p class="footer-description" align="left">
-                Nalanda Open University is a State Open University duly
-                established under the Act of Bihar Government and is also
-                recognized by Distance Education Council, IGNOU, Maidan Garhi,
-                New Delhi.
-              </p>
+              Kuniya Learning Management System is an online learning platform
+              designed to provide students with easy access to courses,
+              learning resources, assignments, and educational services.
+</p>
             </div>
 
             <!-- Quick Links Section -->
@@ -1342,11 +1346,11 @@
               </div>
               <div class="contact-item">
                 <i class="fas fa-envelope"></i>
-                <span>nouegyanhelp@gmail.com</span>
+                <span>kuniyalms@gmail.com</span>
               </div>
               <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <span>+91 7080102007<br /><small>Give us a call</small></span>
+                <span>+91 7907638067<br /><small>Give us a call</small></span>
               </div>
               <div class="contact-item">
                 <i class="fas fa-clock"></i>
@@ -1362,13 +1366,12 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
-              <span>© Copyright 2024 NOU e-Gyan Portal. All rights
-                reserved.</span>
+              <span>© Copyright 2026 Kuniya Learning Management System. All rights reserved ©</span>
             </div>
             <div class="col-md-6 text-center text-md-end">
               <span>Designed & Developed By |
                 <a class="copyright-link" href="mailto:vermashailja018@gmail.com" target="_blank">
-                  Shailja Verma.
+                  Athul K
                 </a>
               </span>
             </div>
@@ -1508,7 +1511,7 @@
   <div id="chat-container">
     <div id="chat-box">
       <div id="chat-header">
-        <span>NOU Assistant 🤖</span>
+        <span>Kuniya Assistant 🤖</span>
         <button onclick="toggleChat()" style="
               background: transparent;
               border: none;
@@ -1528,7 +1531,7 @@
             border-bottom-right-radius: 15px;
             display: flex;
           ">
-        <input type="text" id="user-input" placeholder="Ask about NOU..." />
+        <input type="text" id="user-input" placeholder="Ask about Kuniya..." />
         <button id="send-button" onclick="sendMessage()">Send</button>
       </div>
     </div>
@@ -1556,7 +1559,7 @@
         
         // Add welcome message if chat is empty
         if (document.getElementById("chat-messages").children.length === 0) {
-          appendMessage("Bot", "Hello! Welcome to Nalanda Open University. I'm here to help you with information about courses, admissions, and more. How can I assist you today?");
+         appendMessage("Bot", "Hello! Welcome to Kuniya Learning Management System. I'm here to help you with information about courses, admissions, learning resources, and more. How can I assist you today?");
         }
       }
     }

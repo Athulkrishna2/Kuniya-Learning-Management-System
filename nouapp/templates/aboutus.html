@@ -1,12 +1,14 @@
-{% extends 'parent.html' %} 
-{% load static %} 
+```html
+{% extends 'parent.html' %}
+{% load static %}
 {% block body %}
+
 <style>
   .container {
     width: 100%;
   }
 
-  /* ================= Updated Dark Theme for About Us Page ================= */
+  /* ================= Dark Theme ================= */
   [data-bs-theme="dark"] .about-info,
   .dark-theme .about-info {
     background: linear-gradient(135deg, #071024 0%, #081426 100%) !important;
@@ -38,7 +40,7 @@
     transform: translateY(-4px);
   }
 
-  /* About Section Dark Theme - Matching Index Page */
+  /* About Section */
   [data-bs-theme="dark"] .about-section,
   .dark-theme .about-section {
     background: linear-gradient(to bottom, #071024 0%, #081426 100%) !important;
@@ -69,17 +71,17 @@
   /* Hero Section Dark Theme */
   [data-bs-theme="dark"] .home,
   .dark-theme .home {
-    background-image: linear-gradient(rgba(6, 6, 102, 0.8), rgba(0, 86, 179, 0.7)),
-                    url(../static/images/bookslibrary.jpg) !important;
+    background-image:
+      linear-gradient(rgba(6, 6, 102, 0.8), rgba(0, 86, 179, 0.7)),
+      url(../static/images/bookslibrary.jpg) !important;
   }
 
-  /* Heading Color Fix */
   [data-bs-theme="dark"] h2,
   .dark-theme h2 {
     color: #ffffff !important;
   }
 
-  /* ================= Updated Button Styles - Matching Index Page ================= */
+  /* Buttons */
   [data-bs-theme="dark"] .btn,
   .dark-theme .btn {
     background: linear-gradient(135deg, #0ea5e9, #0369a1) !important;
@@ -96,28 +98,6 @@
     box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4) !important;
   }
 
-  [data-bs-theme="dark"] .btn-primary,
-  .dark-theme .btn-primary {
-    background: linear-gradient(135deg, #0ea5e9, #0369a1) !important;
-    border: none !important;
-    color: #ffffff !important;
-  }
-
-  [data-bs-theme="dark"] .btn-outline-primary,
-  .dark-theme .btn-outline-primary {
-    background: transparent !important;
-    color: #0ea5e9 !important;
-    border: 2px solid #0ea5e9 !important;
-  }
-
-  [data-bs-theme="dark"] .btn-outline-primary:hover,
-  .dark-theme .btn-outline-primary:hover {
-    background: #0ea5e9 !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-  }
-
-  /* Light theme button styles remain the same */
   .btn {
     background: #2a73cc !important;
     color: #ffffff !important;
@@ -131,24 +111,9 @@
     transform: translateY(-1px);
   }
 
-  .btn-primary {
-    background: #2a73cc !important;
-    border-color: #2a73cc !important;
-    color: #ffffff !important;
-  }
-
-  .btn-outline-primary {
-    color: #2a73cc !important;
-    border-color: #2a73cc !important;
-    background: transparent !important;
-  }
-
   .col-sm-5 {
     position: relative;
-    padding-top: 30px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 30px 15px 10px 15px;
   }
 
   .col-sm-7 {
@@ -163,25 +128,11 @@
     height: 70%;
   }
 
-  @media (max-width: 600px) {
-    .col-sm-7 {
-      flex-direction: column;
-      text-align: center;
-      padding-top: 5px;
-      padding-bottom: 0px;
-      text-align: justify;
-    }
-
-    .col-sm-5 {
-      padding-top: 5px;
-      padding-bottom: 0px;
-    }
-  }
-
-  /* hero section */
+  /* Hero Section */
   .home {
-    background-image: linear-gradient(rgba(30, 64, 175, 0.5), rgba(30, 58, 138, 0.6)),
-                  url(../static/images/bookslibrary.jpg);
+    background-image:
+      linear-gradient(rgba(30, 64, 175, 0.5), rgba(30, 58, 138, 0.6)),
+      url(../static/images/bookslibrary.jpg);
     width: 100%;
     min-height: 40vh;
     background-size: cover;
@@ -201,13 +152,22 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.2), transparent);
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(96, 165, 250, 0.2),
+      transparent
+    );
     animation: pulse 4s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    0%, 100% {
+      opacity: 0.5;
+    }
+
+    50% {
+      opacity: 1;
+    }
   }
 
   .hero-content {
@@ -259,6 +219,7 @@
       opacity: 0;
       transform: translateY(-30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -270,6 +231,7 @@
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -285,13 +247,13 @@
     border-radius: 2px;
   }
 
-  /* Dark theme HR */
+  /* Dark Theme HR */
   [data-bs-theme="dark"] hr,
   .dark-theme hr {
     background: linear-gradient(to right, #0ea5e9, #0369a1) !important;
   }
 
-  /* about us info section  */
+  /* About Info */
   .about-info {
     background: #f4f6fb;
     border-radius: 12px;
@@ -349,7 +311,7 @@
     font-size: 1.2rem;
   }
 
-  /* about us section styling  */
+  /* About Section */
   .about-section {
     background: #f4f6fb;
     border-radius: 12px;
@@ -502,71 +464,124 @@
   }
 </style>
 
-<!-- hero section  -->
+<!-- Hero Section -->
 <div class="row">
   <section class="home">
     <div class="hero-content">
+
       <h3>
         <span class="hero-icon">📚</span>
-        <span class="hero-text">From Our Content For Distance Learning</span>
+        <span class="hero-text">
+          Kuniya Learning Management System
+        </span>
       </h3>
-      <p>NOU-e-Gyan PORTAL | NALANDA OPEN UNIVERSITY</p>
+
+      <p>
+        Online Learning Platform | Kuniya Learning Management System
+      </p>
+
     </div>
   </section>
 </div>
 
-<!-- Header Image -->
+<!-- About Us Section -->
 <section class="aboutus">
+
   <div class="container">
-    <!-- about us info section  -->
+
+    <!-- Our Platform -->
     <section class="about-info">
+
       <h3>Our Platform</h3>
+
       <p>
-        NOU-E-Gyan Portal is a secure and user-friendly E-Learning System that enables students to learn remotely. It
-        serves as a Learning Management System (LMS) for colleges and study centers, ensuring continuous and accessible
-        education anytime, anywhere.
+        Kuniya Learning Management System is a secure and user-friendly
+        online learning platform designed to support effective teaching
+        and learning. It provides students and instructors with easy
+        access to courses, study materials, assignments, assessments,
+        and other learning resources anytime and anywhere.
       </p>
-      <ul>
-        <li>Secure & Robust Platform</li>
-        <li>24x7 Accessibility</li>
-        <li>Seamless E-Content Delivery</li>
-        <li>Progress Monitoring</li>
-      </ul>
+
+     
+<ul>
+  <li>🔐 Secure User Login</li>
+  <li>🌐 24×7 Learning Access</li>
+  <li>📚 Seamless E-Content Delivery</li>
+  <li>📊 Progress Monitoring</li>
+</ul>
+
+
     </section>
 
-    <h2 style="text-align:center; font-weight: bold; margin-top: 40px; color:#0a1d69; font-size: 40px;">About Us</h2>
+    <!-- About Us Heading -->
+    <h2 style="
+      text-align:center;
+      font-weight:bold;
+      margin-top:40px;
+      color:#0a1d69;
+      font-size:40px;
+    ">
+      About Us
+    </h2>
+
     <hr>
 
-    <div class="row about-section align-items-center" style="margin: 40px 0;">
+    <!-- About Us Content -->
+    <div class="row about-section align-items-center"
+         style="margin:40px 0;">
+
+      <!-- Image -->
       <div class="col-sm-5 text-center">
-        <img src="{% static 'images/ab.jpeg' %}" class="img-fluid rounded shadow" alt="About NOU-E-Gyan" />
+
+        <img
+          src="{% static 'images/ab.jpeg' %}"
+          class="img-fluid rounded shadow"
+          alt="Kuniya Learning Management System"
+        />
+
       </div>
 
+      <!-- Text -->
       <div class="col-sm-7 about-text">
+
         <p>
-          The <strong>NOU-E-Gyan Portal</strong> is designed to provide a seamless
-          <strong>E-Learning System</strong> that empowers students to learn
-          anytime, anywhere. It is a <strong>secure and robust web application</strong>
-          built to make education accessible from remote locations with ease.
+          <strong>Kuniya Learning Management System</strong> is designed
+          to make education simple, accessible, and effective through
+          digital technology. The platform provides a centralized
+          environment where students can access learning resources
+          and continue their studies from anywhere.
         </p>
 
         <p>
-          Serving as a <strong>Learning Management System (LMS)</strong> for colleges,
-          institutions, and study centers, the portal supports continuous teaching and learning.
-          With its <strong>user-friendly interface</strong> and intuitive design, students
-          and teachers can connect and collaborate effectively even from a distance.
+          The system supports different types of users, including
+          <strong>Administrators, Instructors, and Students</strong>.
+          Administrators can manage users, courses, study materials,
+          and academic information. Instructors can provide learning
+          content and support students, while students can access
+          courses, study materials, assignments, and assessments.
         </p>
 
         <p>
-          Accessible <strong>24×7</strong> from anywhere in the world, the portal ensures
-          secure login and personalized access for authorized users. It simplifies academic
-          processes such as <strong>E-content distribution</strong>, <strong>assessment</strong>,
-          <strong>progress tracking</strong>, and <strong>performance monitoring</strong>
-          for students, teachers, and administrators of <strong>Nalanda Open University</strong>.
+          <strong>Kuniya Learning Management System</strong> provides
+          a convenient way to organize and deliver educational content
+          through a single online platform. It helps reduce manual work,
+          improves communication between instructors and students, and
+          makes learning resources easily available.
         </p>
+
+        <p>
+          Our goal is to provide a
+          <strong>simple, secure, and accessible learning environment</strong>
+          that supports modern online and distance education.
+        </p>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
 {% endblock body %}
+```

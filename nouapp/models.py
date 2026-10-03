@@ -16,6 +16,12 @@ class Student(models.Model):
     emailaddress = models.CharField(max_length=50)
     regdate = models.CharField(max_length=30)
 
+    
+    profile_photo = models.ImageField(
+    upload_to='profile_photos/',
+    blank=True,
+    null=True
+)
     def __str__(self):
         return f"{self.name} ({self.rollno})"
 
@@ -108,3 +114,91 @@ class EnquiryReply(models.Model):
     
     def __str__(self):
         return f"Reply by {self.user.username} on {self.enquiry.subject}"    
+class Book(models.Model):
+
+    title = models.CharField(max_length=200)
+
+    author = models.CharField(
+        max_length=150,
+        blank=True
+    )
+
+    category = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    description = models.TextField(
+        blank=True
+    )
+
+    file = models.FileField(
+        upload_to='ebooks/'
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    def __str__(self):
+        return self.title
+class AssessmentResult(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    total = models.IntegerField(default=5)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.name} - {self.score}/{self.total}"
+class CourseProgress(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey('adminapp.Course', on_delete=models.CASCADE)
+    progress = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.student.name} - {self.course.title} - {self.progress}%"
+class Lesson(models.Model):
+
+    course = models.ForeignKey(
+        'adminapp.Course',
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    description = models.TextField(
+        blank=True
+    )
+
+    order = models.IntegerField(
+        default=1
+    )
+
+    def __str__(self):
+
+        return f"{self.course.title} - {self.title}"
+class LessonProgress(models.Model):
+
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE
+    )
+
+    lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.CASCADE
+    )
+
+    completed = models.BooleanField(
+        default=False
+    )
+
+    def __str__(self):
+
+        return f"{self.student.name} - {self.lesson.title}"

@@ -1,0 +1,337 @@
+```html
+{% extends 'studentparent.html' %}
+
+{% block body %}
+
+<style>
+    .enquiry-header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+    }
+
+    .enquiry-header h2 {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .enquiry-header p {
+        margin: 8px 0 0;
+        opacity: 0.9;
+    }
+
+    .enquiry-card {
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 5px solid #4f46e5;
+    }
+
+    .enquiry-card h4 {
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .enquiry-message {
+        color: #666;
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    .enquiry-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .info-badge {
+        background: #f3f4f6;
+        padding: 7px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        color: #555;
+    }
+
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .status-pending {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status-in_progress {
+        background: #cfe2ff;
+        color: #084298;
+    }
+
+    .status-resolved {
+        background: #d1e7dd;
+        color: #0f5132;
+    }
+
+    .status-closed {
+        background: #e2e3e5;
+        color: #41464b;
+    }
+
+    .priority-low {
+        color: #198754;
+        font-weight: 600;
+    }
+
+    .priority-medium {
+        color: #fd7e14;
+        font-weight: 600;
+    }
+
+    .priority-high {
+        color: #dc3545;
+        font-weight: 600;
+    }
+
+    .new-enquiry-btn {
+        background: white;
+        color: #4f46e5;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .new-enquiry-btn:hover {
+        color: #3730a3;
+        text-decoration: none;
+    }
+
+    .view-btn {
+        background: #4f46e5;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 7px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .view-btn:hover {
+        background: #3730a3;
+        color: white;
+        text-decoration: none;
+    }
+
+    .empty-box {
+        background: white;
+        border-radius: 15px;
+        padding: 50px 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .empty-box i {
+        font-size: 55px;
+        color: #9ca3af;
+        margin-bottom: 15px;
+    }
+
+    .empty-box h4 {
+        color: #555;
+    }
+
+    .empty-box p {
+        color: #888;
+    }
+
+    @media (max-width: 768px) {
+        .enquiry-header {
+            padding: 20px;
+        }
+
+        .enquiry-header h2 {
+            font-size: 22px;
+        }
+    }
+</style>
+
+
+<div class="container-fluid">
+
+    <!-- Header -->
+    <div class="enquiry-header">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+            <div>
+                <h2>
+                    <i class="mdi mdi-message-question-outline"></i>
+                    My Enquiries
+                </h2>
+
+                <p>
+                    View and manage your enquiries
+                </p>
+            </div>
+
+            <div>
+                <a href="{% url 'studentapp:create_enquiry' %}"
+                   class="new-enquiry-btn">
+
+                    <i class="mdi mdi-plus"></i>
+                    New Enquiry
+
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Messages -->
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                 role="alert">
+
+                {{ message }}
+
+                <button type="button"
+                        class="close"
+                        data-dismiss="alert">
+
+                    <span>&times;</span>
+
+                </button>
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- Enquiries -->
+    {% if enquiries %}
+
+        {% for enquiry in enquiries %}
+
+            <div class="enquiry-card">
+
+                <div class="d-flex justify-content-between align-items-start flex-wrap">
+
+                    <div>
+
+                        <h4>
+                            {{ enquiry.subject }}
+                        </h4>
+
+                    </div>
+
+                    <div>
+
+                        <span class="status-badge status-{{ enquiry.status }}">
+                            {{ enquiry.get_status_display }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="enquiry-info">
+
+                    {% if enquiry.category %}
+                        <span class="info-badge">
+                            <i class="mdi mdi-tag-outline"></i>
+                            {{ enquiry.category }}
+                        </span>
+                    {% endif %}
+
+                    <span class="info-badge">
+                        <i class="mdi mdi-calendar"></i>
+
+                        {% if enquiry.created_at %}
+                            {{ enquiry.created_at|date:"d M Y, h:i A" }}
+                        {% else %}
+                            {{ enquiry.enquirydate }}
+                        {% endif %}
+
+                    </span>
+
+                    <span class="info-badge">
+                        Priority:
+
+                        <span class="priority-{{ enquiry.priority }}">
+                            {{ enquiry.get_priority_display }}
+                        </span>
+                    </span>
+
+                </div>
+
+
+                <div class="enquiry-message">
+
+                    {% if enquiry.message %}
+                        {{ enquiry.message|truncatechars:200 }}
+                    {% else %}
+                        {{ enquiry.enquirytext|truncatechars:200 }}
+                    {% endif %}
+
+                </div>
+
+
+                <a href="{% url 'studentapp:enquiry_detail' enquiry.id %}"
+                   class="view-btn">
+
+                    <i class="mdi mdi-eye-outline"></i>
+                    View Enquiry
+
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty-box">
+
+            <i class="mdi mdi-message-question-outline"></i>
+
+            <h4>No Enquiries Yet</h4>
+
+            <p>
+                You have not submitted any enquiries.
+            </p>
+
+            <a href="{% url 'studentapp:create_enquiry' %}"
+               class="view-btn">
+
+                <i class="mdi mdi-plus"></i>
+                Create Your First Enquiry
+
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock body %}
+```

@@ -1,0 +1,350 @@
+{% extends 'parent.html' %}
+
+{% block body %}
+
+<style>
+
+.course-details-page {
+    min-height: 80vh;
+    padding: 60px 20px;
+    background: #f5f7fb;
+}
+
+.course-details-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.course-card {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.course-card h1 {
+    color: #060666;
+    margin-bottom: 15px;
+}
+
+.course-description {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+
+/* COURSE PROGRESS */
+
+.progress-box {
+    background: #f0f6ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.progress-box h3 {
+    color: #060666;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #0056b3;
+    border-radius: 10px;
+}
+
+.progress-text {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #0056b3;
+}
+
+
+/* LESSONS */
+
+.lessons-box {
+    margin-bottom: 30px;
+}
+
+.lessons-box h2 {
+    color: #060666;
+    margin-bottom: 20px;
+}
+
+.lesson-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f5f7fb;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+
+.lesson-number {
+    width: 40px;
+    height: 40px;
+    background: #0056b3;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.lesson-content {
+    flex: 1;
+}
+
+.lesson-content h3 {
+    margin: 0 0 5px;
+    color: #060666;
+}
+
+.lesson-content p {
+    margin: 0;
+    color: #666;
+}
+
+
+/* BUTTONS */
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.course-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.start-btn {
+    background: #0056b3;
+    color: white;
+}
+
+.complete-btn {
+    background: green;
+    color: white;
+}
+
+.completed-btn {
+    background: #777;
+    color: white;
+    cursor: default;
+}
+
+.lesson-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #0056b3;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.lesson-completed {
+    padding: 8px 15px;
+    border-radius: 6px;
+    background: #d4edda;
+    color: green;
+    font-weight: bold;
+}
+
+</style>
+
+
+<section class="course-details-page">
+
+<div class="course-details-container">
+
+    <div class="course-card">
+
+        <!-- COURSE TITLE -->
+
+        <h1>
+            📚 {{ course.title }}
+        </h1>
+
+
+        <!-- COURSE DESCRIPTION -->
+
+        <div class="course-description">
+
+            {{ course.description }}
+
+        </div>
+
+
+        <!-- COURSE PROGRESS -->
+
+        <div class="progress-box">
+
+            <h3>
+                Course Progress
+            </h3>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    style="width: {{ progress }}%;"
+                ></div>
+
+            </div>
+
+            <div class="progress-text">
+
+                {{ progress }}% Completed
+
+            </div>
+
+        </div>
+
+
+        <!-- LESSONS -->
+
+        <div class="lessons-box">
+
+            <h2>
+                📖 Course Lessons
+            </h2>
+
+            {% for lesson in lessons %}
+
+            <div class="lesson-card">
+
+                <div class="lesson-number">
+
+                    {{ forloop.counter }}
+
+                </div>
+
+
+                <div class="lesson-content">
+
+                    <h3>
+                        {{ lesson.title }}
+                    </h3>
+
+                    <p>
+                        {{ lesson.description }}
+                    </p>
+
+                </div>
+
+
+                <!-- CHECK IF LESSON IS COMPLETED -->
+
+                {% if lesson_progress %}
+
+                {% if lesson.id in completed_lesson_ids %}
+                        <span class="lesson-completed">
+                            ✓ Completed
+                        </span>
+
+                    {% else %}
+
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+                            <input
+                                type="hidden"
+                                name="lesson_id"
+                                value="{{ lesson.id }}"
+                            >
+
+                            <button
+                                type="submit"
+                                name="action"
+                                value="complete_lesson"
+                                class="lesson-btn"
+                            >
+                                ✓ Mark Complete
+                            </button>
+
+                        </form>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <input
+                            type="hidden"
+                            name="lesson_id"
+                            value="{{ lesson.id }}"
+                        >
+
+                        <button
+                            type="submit"
+                            name="action"
+                            value="complete_lesson"
+                            class="lesson-btn"
+                        >
+                            ✓ Mark Complete
+                        </button>
+
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+            {% empty %}
+
+            <p>
+                No lessons available for this course.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- COURSE BUTTON -->
+
+        <div class="button-group">
+
+            {% if progress == 100 %}
+
+                <button
+                    class="course-btn completed-btn"
+                    disabled
+                >
+                    ✓ Course Completed
+                </button>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+{% endblock %}

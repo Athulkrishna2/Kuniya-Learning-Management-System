@@ -32,15 +32,19 @@ This project and everyone participating in it is governed by our commitment to f
 There are many ways to contribute to this project:
 
 ### 1. Reporting Bugs 🐛
+
 Found a bug? Help us improve by reporting it! See the [Reporting Bugs](#reporting-bugs) section below.
 
 ### 2. Suggesting Features ✨
+
 Have an idea for a new feature? We'd love to hear it! Check out [Suggesting Enhancements](#suggesting-enhancements).
 
 ### 3. Writing Code 💻
+
 Want to fix a bug or implement a feature? Follow our [Development Workflow](#development-workflow).
 
 ### 4. Improving Documentation 📚
+
 Documentation improvements are always welcome, from fixing typos to adding new guides.
 
 ---
@@ -50,6 +54,7 @@ Documentation improvements are always welcome, from fixing typos to adding new g
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Python 3.8 or higher
 - Git
 - A text editor or IDE (VS Code, PyCharm, etc.)
@@ -57,45 +62,52 @@ Before you begin, ensure you have the following installed:
 
 ### Setting Up Your Development Environment
 
-1. **Fork the repository** on GitHub
+1. **Fork the repository** on GitHub.
+
 2. **Clone your fork** locally:
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/Learning-Management-System-Nalanda-Open-University-.git
-   cd Learning-Management-System-Nalanda-Open-University-
-   ```
+
+```bash
+git clone https://github.com/YOUR-USERNAME/Learning-Management-System-Nalanda-Open-University-.git
+cd Learning-Management-System-Nalanda-Open-University-
+```
 
 3. **Add the upstream repository:**
-   ```bash
-   git remote add upstream https://github.com/ShailjaVerma18/Learning-Management-System-Nalanda-Open-University-.git
-   ```
+
+```bash
+git remote add upstream https://github.com/ShailjaVerma18/Learning-Management-System-Nalanda-Open-University-.git
+```
 
 4. **Create a virtual environment:**
-   ```bash
-   # On Windows
-   python -m venv venv
-   venv\Scripts\activate
 
-   # On macOS/Linux
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
+```bash
+# On Windows
+python -m venv venv
+venv\Scripts\activate
+
+# On macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
 5. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+
+```bash
+pip install -r requirements.txt
+```
 
 6. **Set up the database:**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+```
 
 7. **Run the development server:**
-   ```bash
-   python manage.py runserver
-   ```
+
+```bash
+python manage.py runserver
+```
 
 ---
 
@@ -111,11 +123,11 @@ git checkout -b feature/your-feature-name
 
 ### Making Changes
 
-1. Make your changes in your feature branch
-2. Write or update tests as needed
-3. Ensure your code follows our style guidelines
-4. Test your changes thoroughly
-5. Update documentation if necessary
+1. Make your changes in your feature branch.
+2. Write or update tests as needed.
+3. Ensure your code follows our style guidelines.
+4. Test your changes thoroughly.
+5. Update documentation if necessary.
 
 ### Keeping Your Fork Updated
 
@@ -130,12 +142,11 @@ git push origin main
 
 ---
 
-
 ## 💬 Commit Message Guidelines
 
 Write clear and meaningful commit messages following this format:
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body>
@@ -144,6 +155,7 @@ Write clear and meaningful commit messages following this format:
 ```
 
 ### Types:
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation changes
@@ -154,7 +166,7 @@ Write clear and meaningful commit messages following this format:
 
 ### Examples:
 
-```
+```text
 feat(courses): add course search functionality
 
 Implemented search feature allowing users to search courses by title,
@@ -164,7 +176,7 @@ page with real-time filtering.
 Closes #123
 ```
 
-```
+```text
 fix(assignments): resolve submission deadline validation bug
 
 Fixed issue where assignments could be submitted after deadline.
@@ -179,21 +191,22 @@ Fixes #456
 
 ### Before Submitting
 
-1. Ensure your code follows our style guidelines
-2. Update documentation if you've changed functionality
-3. Add or update tests as necessary
-4. Verify all tests pass
-5. Update the README.md if needed
-6. Ensure your branch is up to date with main
+1. Ensure your code follows our style guidelines.
+2. Update documentation if you've changed functionality.
+3. Add or update tests as necessary.
+4. Verify all tests pass.
+5. Update the `README.md` if needed.
+6. Ensure your branch is up to date with `main`.
 
 ### Submitting a Pull Request
 
 1. **Push your changes** to your fork:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
 
-2. **Create a Pull Request** on GitHub with a clear title and description
+```bash
+git push origin feature/your-feature-name
+```
+
+2. **Create a Pull Request** on GitHub with a clear title and description.
 
 3. **Fill out the PR template** with all relevant information:
    - Description of changes
@@ -202,17 +215,19 @@ Fixes #456
    - Testing performed
    - Screenshots (if applicable)
 
-4. **Wait for review** - maintainers will review your PR and may request changes
+4. **Wait for review** - maintainers will review your PR and may request changes.
 
-5. **Address feedback** - make any requested changes and push updates
+5. **Address feedback** - make any requested changes and push updates.
 
-6. **Celebrate!** 🎉 Once approved, your PR will be merged
+6. **Celebrate!** 🎉 Once approved, your PR will be merged.
 
+---
 
 ## 🏆 Recognition
 
 Contributors will be:
-- Listed in the README.md contributors section
+
+- Listed in the `README.md` contributors section
 - Mentioned in release notes for significant contributions
 - Given credit in code comments for major features
 
@@ -238,8 +253,13 @@ If you need help with your contribution:
 ---
 
 <div align="center">
+
 <p><strong>Thank you for contributing! 🎉</strong></p>
+
 <p><em>Together, we're building better educational tools</em></p>
+
 </div>
 
 [⬆️ Back to Top](#contributing-to-learning-management-system-)
+
+---

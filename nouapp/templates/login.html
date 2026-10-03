@@ -1,1013 +1,283 @@
+```html
 {% extends 'parent.html' %}
 {% load static %}
+
 {% block body %}
+
 <style>
-  :root {
-    --primary-color: #1e40af;
-    --accent-color: #3b82f6;
-    --card-bg: #ffffff;
-    --card-text: #1e293b;
-    --success-green: #10b981;
-    --danger-red: #ef4444;
-    --light-bg: #f8fafc;
-    --border-color: #e2e8f0;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  /* Hero Section */
-  .home {
-    background-image: linear-gradient(rgba(30, 64, 175, 0.5), rgba(30, 58, 138, 0.6)),
-                  url(../static/images/bookslibrary.jpg);
-    width: 100%;
-    min-height: 40vh;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding: 3rem 1rem;
-  }
-
-  .home::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.2), transparent);
-    animation: pulse 4s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: white;
-    padding: 1.5rem;
-    max-width: 1000px;
-    width: 100%;
-  }
-
-  .hero-content h3 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0 0 1.5rem 0;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-    animation: fadeInDown 1s ease-out;
-    line-height: 1.4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .hero-icon {
-    font-size: 2.5rem;
-    flex-shrink: 0;
-    display: inline-block;
-  }
-
-  .hero-text {
-    display: inline-block;
-  }
-
-  .hero-content p {
-    font-size: 1.25rem;
-    font-weight: 500;
-    opacity: 0.95;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 1s ease-out 0.3s both;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-
-  /* Login Form Container */
-  .login-container {
-    background: var(--card-bg);
-    color: var(--card-text);
-    margin: 3rem auto 5rem auto;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(30,64,175,0.12);
-    padding: 0;
-    max-width: 500px;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-  }
-
-  /* Form Header */
-  .form-header {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    padding: 2rem;
-    text-align: center;
-    color: white;
-  }
-
-  .form-heading {
-    font-weight: 700;
-    margin: 0;
-    font-size: 1.85rem;
-    letter-spacing: 0.5px;
-    color: white !important;
-  }
-
-  .form-subheading {
-    margin: 0.5rem 0 0 0;
-    font-size: 0.95rem;
-    opacity: 0.95;
-    font-weight: 400;
-    color: white !important;
-  }
-
-  /* Form Body */
-  .form-body {
-    padding: 2.5rem;
-    background: transparent;
-  }
-  
-  .form-section {
-    background: transparent;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: none;
-    border: 1px solid rgba(30,64,175,0.06);
-  }
-  
-  /* Form Inputs */
-  .form-control, .form-select {
-    border: 2px solid var(--border-color);
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    transition: all 0.3s ease;
-    width: 100%;
-    font-size: 0.95rem;
-    background: var(--card-bg);
-    color: var(--card-text);
-    margin-bottom: 1.25rem;
-  }
-
-  .form-control:focus, .form-select:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
-    outline: none;
-    background: var(--card-bg);
-  }
-
-  .form-label {
-    font-weight: 600;
-    color: var(--card-text);
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    display: block;
-  }
-
-  .required::after {
-    content: " *";
-    color: var(--danger-red);
-    font-weight: 700;
-  }
-
-  /* Input Icons */
-  .input-group {
-    position: relative;
-    margin-bottom: 1.25rem;
-  }
-
-  .input-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #64748b;
-    font-size: 1.1rem;
-    pointer-events: none;
-  }
-
-  .input-group input,
-  .input-group select {
-    padding-left: 2.75rem;
-    margin-bottom: 0;
-  }
-
-  /* Submit Button */
-  .submit-section {
-    padding: 2rem 2.5rem;
-    background: var(--card-bg);
-  }
-
-  .submit-btn {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    border: none;
-    border-radius: 12px;
-    padding: 1rem 2.5rem;
-    font-weight: 600;
-    color: white;
-    width: 100%;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    box-shadow: 0 4px 15px rgba(30,64,175,0.3);
-    cursor: pointer;
-  }
-
-  .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(30,64,175,0.4);
-  }
-
-  .submit-btn:active {
-    transform: translateY(0);
-  }
-
-  /* Links */
-  .form-links {
-    text-align: center;
-    margin-top: 1.5rem;
-  }
-
-  .form-links p {
-    margin: 0.75rem 0;
-    font-size: 0.95rem;
-    color: var(--card-text);
-    font-weight: 500;
-  }
-
-  .form-links a {
-    color: var(--accent-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-
-  .form-links a:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
-  }
-
-  /* Alerts */
-  .alert-success {
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    font-weight: 500;
-    border: none;
-    background: var(--success-green);
-    color: white;
-    margin-bottom: 1.5rem;
-  }
-
-  /* Divider */
-  .divider {
-    text-align: center;
-    margin: 1.5rem 0;
-    position: relative;
-  }
-
-  .divider::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--border-color);
-  }
-
-  .divider span {
-    background: var(--card-bg);
-    padding: 0 1rem;
-    position: relative;
-    color: var(--card-text);
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  /* ================= Fixed Dark Theme - No Grey Text ================= */
-  [data-bs-theme="dark"] .login-container,
-  .dark-theme .login-container {
-    background: linear-gradient(135deg, #0a1a32 0%, #071024 100%) !important;
-    border: 1px solid rgba(14, 165, 233, 0.3) !important;
-    box-shadow: 0 10px 40px rgba(14, 165, 233, 0.15) !important;
-  }
-
-  [data-bs-theme="dark"] .form-body,
-  .dark-theme .form-body {
-    background: linear-gradient(135deg, #081426 0%, #061021 100%) !important;
-  }
-
-  [data-bs-theme="dark"] .form-section,
-  .dark-theme .form-section {
-    background: linear-gradient(135deg, #0c1e3e 0%, #091830 100%) !important;
-    border: 1px solid rgba(14, 165, 233, 0.2) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-  }
-
-  [data-bs-theme="dark"] .submit-section,
-  .dark-theme .submit-section {
-    background: linear-gradient(135deg, #0a1a32 0%, #071024 100%) !important;
-  }
-
-  /* Form Labels - White in dark theme */
-  [data-bs-theme="dark"] .form-label,
-  .dark-theme .form-label {
-    color: #ffffff !important;
-    font-weight: 600;
-  }
-
-  /* Form Inputs */
-  [data-bs-theme="dark"] .form-control,
-  [data-bs-theme="dark"] .form-select,
-  .dark-theme .form-control,
-  .dark-theme .form-select {
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(14, 165, 233, 0.4) !important;
-  }
-
-  [data-bs-theme="dark"] .form-control:focus,
-  [data-bs-theme="dark"] .form-select:focus,
-  .dark-theme .form-control:focus,
-  .dark-theme .form-select:focus {
-    background: rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-    border-color: #0ea5e9 !important;
-    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.25) !important;
-  }
-
-  [data-bs-theme="dark"] .form-control::placeholder,
-  .dark-theme .form-control::placeholder {
-    color: #94a3b8 !important;
-  }
-
-  /* Links and Text - White in dark theme */
-  [data-bs-theme="dark"] .form-links p,
-  .dark-theme .form-links p {
-    color: #ffffff !important;
-    font-weight: 500;
-  }
-
-  [data-bs-theme="dark"] .form-links a,
-  .dark-theme .form-links a {
-    color: #0ea5e9 !important;
-    font-weight: 600;
-  }
-
-  [data-bs-theme="dark"] .form-links a:hover,
-  .dark-theme .form-links a:hover {
-    color: #64b5f6 !important;
-  }
-
-  /* Divider - White in dark theme */
-  [data-bs-theme="dark"] .divider span,
-  .dark-theme .divider span {
-    background: linear-gradient(135deg, #0a1a32 0%, #071024 100%) !important;
-    color: #ffffff !important;
-    font-weight: 600;
-  }
-
-  [data-bs-theme="dark"] .divider::before,
-  .dark-theme .divider::before {
-    background: rgba(14, 165, 233, 0.4) !important;
-  }
-
-  /* Icons - Blue in dark theme */
-  [data-bs-theme="dark"] .input-icon,
-  .dark-theme .input-icon {
-    color: #0ea5e9 !important;
-  }
-
-  /* Hero Section in Dark Theme */
-  [data-bs-theme="dark"] .home,
-  .dark-theme .home {
-    background-image: linear-gradient(rgba(6, 6, 102, 0.8), rgba(0, 86, 179, 0.7)), url(../static/images/bookslibrary.jpg) !important;
-  }
-
-  /* Buttons - Blue in dark theme */
-  [data-bs-theme="dark"] .submit-btn,
-  .dark-theme .submit-btn {
-    background: linear-gradient(135deg, #0ea5e9, #0369a1) !important;
-    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3) !important;
-  }
-
-  [data-bs-theme="dark"] .submit-btn:hover,
-  .dark-theme .submit-btn:hover {
-    background: linear-gradient(135deg, #0284c7, #075985) !important;
-    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4) !important;
-  }
-
-  /* Form Header - Blue in dark theme */
-  [data-bs-theme="dark"] .form-header,
-  .dark-theme .form-header {
-    background: linear-gradient(135deg, #0ea5e9, #0369a1) !important;
-  }
-
-  [data-bs-theme="dark"] .form-heading,
-  .dark-theme .form-heading {
-    color: #ffffff !important;
-  }
-
-  [data-bs-theme="dark"] .form-subheading,
-  .dark-theme .form-subheading {
-    color: #e6eef8 !important;
-  }
-
-  /* Alerts in Dark Theme */
-  [data-bs-theme="dark"] .alert-success,
-  .dark-theme .alert-success {
-    background: linear-gradient(135deg, #059669, #047857) !important;
-    color: #ffffff !important;
-  }
-
-  /* Select dropdown options in dark theme */
-  [data-bs-theme="dark"] .form-select option,
-  .dark-theme .form-select option {
-    background: #0a1a32 !important;
-    color: #ffffff !important;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
     .login-container {
-      max-width: 90%;
-      margin: 2.5rem auto 4rem auto;
-    }
-  }
-
-  @media (max-width: 992px) {
-    .home {
-      min-height: 35vh;
-      padding: 2.5rem 1rem;
-    }
-
-    .hero-content h3 {
-      font-size: 2rem;
-    }
-
-    .hero-icon {
-      font-size: 2rem;
-    }
-
-    .hero-content p {
-      font-size: 1.125rem;
-    }
-
-    .login-container {
-      max-width: 90%;
-      margin: 2.5rem auto 4rem auto;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .home {
-      min-height: 30vh;
-      padding: 2rem 1rem;
-    }
-    
-    .hero-content {
-      padding: 1rem;
-    }
-    
-    .hero-content h3 { 
-      font-size: 1.5rem;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    .hero-icon {
-      font-size: 1.5rem;
-    }
-    
-    .hero-content p { 
-      font-size: 0.938rem;
-      line-height: 1.5;
-    }
-
-    .login-container {
-      margin: 1.5rem 1rem 3rem 1rem;
-      border-radius: 16px;
+        max-width: 500px;
+        margin: 40px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        overflow: hidden;
     }
 
     .form-header {
-      padding: 1.75rem 1.25rem;
+        background: #f5f7fb;
+        padding: 25px;
+        text-align: center;
     }
 
     .form-heading {
-      font-size: 1.5rem;
+        color: #222222;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 8px;
     }
 
     .form-subheading {
-      font-size: 0.9rem;
+        color: #666666;
+        margin-bottom: 0;
     }
 
     .form-body {
-      padding: 1.5rem 1.25rem;
+        padding: 30px;
     }
 
     .form-section {
-      padding: 1.5rem;
-      border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
-    .submit-section {
-      padding: 1.5rem 1.25rem;
-    }
-
-    .submit-btn {
-      padding: 0.9rem 2rem;
-      font-size: 0.95rem;
-    }
-
-    .form-control, .form-select {
-      padding: 0.75rem 0.9rem 0.75rem 2.6rem;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
+    .form-label {
+        display: block;
+        color: #222222;
+        font-weight: 600;
+        margin-bottom: 8px;
     }
 
     .input-group {
-      margin-bottom: 1rem;
+        position: relative;
+        display: flex;
+        align-items: center;
     }
 
     .input-icon {
-      font-size: 1rem;
-      left: 0.9rem;
+        position: absolute;
+        left: 14px;
+        color: #777777;
+        z-index: 2;
     }
 
-    .form-label {
-      font-size: 0.875rem;
-      margin-bottom: 0.4rem;
+    .form-control,
+    .form-select {
+        width: 100%;
+        min-height: 48px;
+        padding: 10px 12px 10px 42px;
+        border: 1px solid #cccccc;
+        border-radius: 6px;
+        color: #222222;
+        background: #ffffff;
+        box-sizing: border-box;
     }
 
-    .form-links p {
-      font-size: 0.875rem;
-      margin: 0.65rem 0;
-    }
-
-    .divider {
-      margin: 1.25rem 0;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .home {
-      min-height: 28vh;
-      padding: 1.5rem 0.75rem;
-    }
-
-    .hero-content {
-      padding: 0.75rem 0.5rem;
-    }
-
-    .hero-content h3 {
-      font-size: 1.25rem;
-      gap: 0.4rem;
-      line-height: 1.3;
-      margin-bottom: 0.875rem;
-    }
-
-    .hero-icon {
-      font-size: 1.25rem;
-    }
-
-    .hero-text {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .hero-content p {
-      font-size: 0.813rem;
-      line-height: 1.4;
-    }
-
-    .login-container {
-      margin: 1rem 0.75rem 2rem 0.75rem;
-      border-radius: 14px;
-    }
-
-    .form-header {
-      padding: 1.5rem 1rem;
-    }
-
-    .form-heading {
-      font-size: 1.35rem;
-    }
-
-    .form-subheading {
-      font-size: 0.85rem;
-    }
-
-    .form-body {
-      padding: 1.25rem 1rem;
-    }
-
-    .form-section {
-      padding: 1.25rem;
-      border-radius: 10px;
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
     }
 
     .submit-section {
-      padding: 1.25rem 1rem;
+        margin-top: 25px;
+        text-align: center;
     }
 
     .submit-btn {
-      padding: 0.8rem 1.75rem;
-      font-size: 0.9rem;
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 6px;
+        background: #007bff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
     }
 
-    .form-control, .form-select {
-      padding: 0.7rem 0.85rem 0.7rem 2.5rem;
-      font-size: 0.875rem;
-      border-radius: 9px;
-      margin-bottom: 0.9rem;
+    .submit-btn:hover {
+        background: #0056b3;
     }
 
-    .input-icon {
-      font-size: 0.95rem;
-      left: 0.85rem;
-    }
-
-    .form-label {
-      font-size: 0.85rem;
-      margin-bottom: 0.35rem;
+    .form-links {
+        margin-top: 20px;
+        color: #555555;
     }
 
     .form-links p {
-      font-size: 0.813rem;
-      margin: 0.6rem 0;
+        margin: 12px 0;
     }
 
     .form-links a {
-      font-size: 0.813rem;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .form-links a:hover {
+        text-decoration: underline;
     }
 
     .divider {
-      margin: 1rem 0;
+        margin: 18px 0;
+        color: #888888;
     }
 
-    .divider span {
-      font-size: 0.8rem;
-      padding: 0 0.75rem;
-    }
-  }
+    @media (max-width: 576px) {
+        .login-container {
+            margin: 20px 12px;
+        }
 
-  @media (max-width: 480px) {
-    .home {
-      min-height: 26vh;
-      padding: 1.25rem 0.5rem;
+        .form-body {
+            padding: 20px;
+        }
     }
-    
-    .hero-content h3 { 
-      font-size: 1.125rem;
-      gap: 0.35rem;
-    }
-    
-    .hero-icon {
-      font-size: 1.125rem;
-    }
-    
-    .hero-content p { 
-      font-size: 0.75rem;
-    }
-    
-    .login-container {
-      margin: 1rem 0.5rem 2rem 0.5rem;
-    }
-    
-    .form-header {
-      padding: 1.25rem 0.75rem;
-    }
-    
-    .form-heading {
-      font-size: 1.2rem;
-    }
-    
-    .form-subheading {
-      font-size: 0.8rem;
-    }
-    
-    .form-body {
-      padding: 1rem;
-    }
-    
-    .form-section {
-      padding: 1rem;
-      border-radius: 10px;
-    }
-    
-    .submit-section {
-      padding: 1rem;
-    }
-    
-    .submit-btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
-    }
-    
-    .form-control, .form-select {
-      padding: 0.65rem 0.85rem 0.65rem 2.4rem;
-      font-size: 0.85rem;
-      border-radius: 8px;
-    }
-
-    .input-icon {
-      font-size: 0.95rem;
-      left: 0.85rem;
-    }
-
-    .form-links p {
-      font-size: 0.85rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .home {
-      min-height: 26vh;
-      padding: 1.25rem 0.5rem;
-    }
-
-    .hero-content h3 {
-      font-size: 1rem;
-      gap: 0.35rem;
-    }
-
-    .hero-icon {
-      font-size: 1rem;
-    }
-
-    .hero-content p {
-      font-size: 0.688rem;
-    }
-
-    .login-container {
-      margin: 0.75rem 0.5rem 1.75rem 0.5rem;
-      border-radius: 12px;
-    }
-
-    .form-header {
-      padding: 1.25rem 0.85rem;
-    }
-
-    .form-heading {
-      font-size: 1.2rem;
-      letter-spacing: 0.3px;
-    }
-
-    .form-subheading {
-      font-size: 0.8rem;
-    }
-
-    .form-body {
-      padding: 1rem 0.85rem;
-    }
-
-    .form-section {
-      padding: 1rem 0.9rem;
-    }
-
-    .submit-section {
-      padding: 1rem 0.85rem;
-    }
-
-    .submit-btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.875rem;
-    }
-
-    .form-control, .form-select {
-      padding: 0.65rem 0.8rem 0.65rem 2.4rem;
-      font-size: 0.85rem;
-    }
-
-    .input-icon {
-      font-size: 0.9rem;
-      left: 0.8rem;
-    }
-
-    .form-label {
-      font-size: 0.813rem;
-    }
-  }
- 
-  @media (max-width: 360px) {
-    .hero-content h3 {
-      font-size: 0.938rem;
-    }
-
-    .hero-icon {
-      font-size: 0.938rem;
-    }
-
-    .hero-content p {
-      font-size: 0.625rem;
-    }
-
-    .login-container {
-      margin: 0.5rem 0.25rem 1.5rem 0.25rem;
-    }
-
-    .form-heading {
-      font-size: 1.1rem;
-    }
-
-    .form-body {
-      padding: 0.85rem 0.7rem;
-    }
-
-    .form-section {
-      padding: 0.85rem 0.75rem;
-    }
-
-    .submit-section {
-      padding: 0.85rem 0.7rem;
-    }
-
-    .form-control, .form-select {
-      padding: 0.6rem 0.75rem 0.6rem 2.3rem;
-      font-size: 0.813rem;
-    }
-  }
-
 </style>
 
-<!-- Hero Section -->
-<section class="home">
-    <div class="hero-content">
-      <h3>
-        <span class="hero-icon">📚</span>
-        <span class="hero-text">From Our Content For Distance Learning</span>
-      </h3>
-      <p>NOU-e-Gyan PORTAL | NALANDA OPEN UNIVERSITY</p>
+<div class="container">
+
+    <div class="login-container">
+
+        <div class="form-header">
+            <h2 class="form-heading">LOG IN</h2>
+            <p class="form-subheading">
+                Enter your credentials to access your account
+            </p>
+        </div>
+
+        <div class="form-body">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert">
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form action="{% url 'nouapp:login' %}"
+                  id="frmlogin"
+                  method="POST"
+                  autocomplete="off">
+
+                {% csrf_token %}
+
+                <div class="form-section">
+
+                    <!-- User ID -->
+                    <div>
+                        <label class="form-label" for="userid">
+                            User ID
+                        </label>
+
+                        <div class="input-group">
+                            <i class="fa fa-user input-icon"></i>
+
+                            <input
+                                type="text"
+                                name="userid"
+                                id="userid"
+                                class="form-control"
+                                placeholder="Enter your user ID"
+                                autocomplete="off"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <label class="form-label" for="password">
+                            Password
+                        </label>
+
+                        <div class="input-group">
+                            <i class="fa fa-lock input-icon"></i>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                                autocomplete="new-password"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- User Type -->
+                    <div>
+                        <label class="form-label" for="usertype">
+                            User Type
+                        </label>
+
+                        <div class="input-group">
+                            <i class="fa fa-users input-icon"></i>
+
+                            <select
+                                name="usertype"
+                                id="usertype"
+                                class="form-select"
+                                required
+                            >
+                                <option value="">--Select User Type--</option>
+                                <option value="student">Student</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Login Button -->
+                <div class="submit-section">
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fa fa-sign-in"></i>
+                        Login to Account
+                    </button>
+
+                    <div class="form-links">
+
+                        <p>
+                            <a href="{% url 'nouapp:forgot_password' %}">
+                                <i class="fa fa-question-circle"></i>
+                                Forgot Password?
+                            </a>
+                        </p>
+
+                        <div class="divider">
+                            OR
+                        </div>
+
+                        <p>
+                            Don't have an account?
+
+                            <a href="{% url 'nouapp:registration' %}">
+                                <i class="fa fa-user-plus"></i>
+                                Register here
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-</section>
 
-<!-- Login Form -->
-<div class="login-container">
-  <!-- Form Header -->
-  <div class="form-header">
-    <h2 class="form-heading">LOG IN</h2>
-    <p class="form-subheading">Enter your credentials to access your account</p>
-  </div>
-
-  <!-- Form Body -->
-  <div class="form-body">
-    {% if messages %}
-      {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ message }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      {% endfor %}
-    {% endif %}
-
-    <form action="{% url 'nouapp:login' %}" id="frmlogin" method="post" onsubmit="event.preventDefault();validate();">
-      {% csrf_token %}
-      
-      <div class="form-section">
-        <!-- User ID -->
-        <div>
-          <label class="form-label required">User ID</label>
-          <div class="input-group">
-            <i class="fa fa-user input-icon"></i>
-            <input
-              type="text"
-              name="userid"
-              id="userid"
-              class="form-control"
-              placeholder="Enter your user ID"
-              autocomplete="username"
-            />
-          </div>
-        </div>
-
-        <!-- Password -->
-        <div>
-          <label class="form-label required">Password</label>
-          <div class="input-group">
-            <i class="fa fa-lock input-icon"></i>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              class="form-control"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-            />
-          </div>
-        </div>
-
-        <!-- User Type -->
-        <div>
-          <label class="form-label required">User Type</label>
-          <div class="input-group">
-            <i class="fa fa-users input-icon"></i>
-            <select name="usertype" id="usertype" class="form-select">
-              <option value="">--Select User Type--</option>
-              <option value="student">Student</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <!-- Submit Section -->
-  <div class="submit-section">
-    <button type="submit" class="submit-btn" onclick="validate()">
-      <i class="fa fa-sign-in"></i> Login to Account
-    </button>
-
-    <div class="form-links">
-      <p>
-        <a href="{% url 'nouapp:forgot_password' %}">
-          <i class="fa fa-question-circle"></i> Forgot Password?
-        </a>
-      </p>
-      
-      <div class="divider">
-        <span>OR</span>
-      </div>
-      
-      <p>
-        Don't have an account?
-        <a href="{% url 'nouapp:registration' %}">
-          <i class="fa fa-user-plus"></i> Register here
-        </a>
-      </p>
-    </div>
-  </div>
 </div>
 
-<!-- Validation Script -->
-<script>
-  function validate() {
-    var userid = document.getElementById("userid");
-    var password = document.getElementById("password");
-    var usertype = document.getElementById("usertype");
-    
-    if (userid.value == "" || userid.value == null) {
-      alert("Please enter User ID");
-      userid.focus();
-      return false;
-    }
-    
-    if (password.value == "" || password.value == null) {
-      alert("Please enter Password");
-      password.focus();
-      return false;
-    }
-    
-    if (usertype.value == "" || usertype.value == null) {
-      alert("Please select User Type");
-      usertype.focus();
-      return false;
-    }
-    
-    document.getElementById("frmlogin").submit();
-    return true;
-  }
-
-  // Add enter key support
-  document.getElementById("frmlogin").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      validate();
-    }
-  });
-</script>
-
 {% endblock body %}
+```

@@ -1293,7 +1293,7 @@
           Transform Your Future With Distance Learning
         </h1>
         <p class="mb-4">
-          <i class="fa fa-graduation-cap"></i> NOU e-Gyan Portal - Empowering Education by Nalanda Open University
+          <i class="fa fa-graduation-cap"></i> Kuniya Learning Management System
         </p>
 
         <!-- Search Box -->
@@ -1361,15 +1361,15 @@
 <section class="about-section">
   <div class="container">
     <div class="section-header">
-      <h2>About NOU e-Gyan Portal</h2>
-      <p>A unique initiative by Hon'ble Vice-Chancellor Prof. (Dr.) K C Sinha, aimed at providing comprehensive online study resources to students worldwide.</p>
+      <h2>About Kuniya Learning Management System</h2>
+      <p>Kuniya Learning Management System is a modern online platform designed to provide students with easy and convenient access to digital learning resources</p>
     </div>
 
     <div class="about-content">
       <div class="about-text-content">
-        <h3>Empowering Distance Learning</h3>
+       <h3>Empowering Online Learning</h3>
         <p>
-          Nalanda Open University welcomes all students, faculties, and study centres to the innovative <strong>NOU e-Gyan</strong> portal. This web-based platform provides 24×7 access to comprehensive educational resources from anywhere in the world.
+        Kuniya Learning Management System provides students and instructors with a simple and user-friendly platform for online education. The platform allows users to access learning resources, courses, assignments, quizzes, and other educational activities from anywhere.
         </p>
         <p>
           Our portal revolutionizes distance education by seamlessly integrating e-Content Distribution, Delivery, Tracking, Assessment, and Progress Monitoring for all stakeholders including students, teachers, and administrators.
@@ -1455,7 +1455,9 @@
           <div class="service-icon">📚</div>
           <h4>e-Books Library</h4>
           <p>Browse our extensive digital book collection</p>
-          <a href="#" class="service-btn">Browse Library</a>
+          <a href="{% url 'nouapp:library' %}" class="service-btn">
+    Browse Library
+</a>
         </div>
       </div>
 
@@ -1464,7 +1466,7 @@
           <div class="service-icon">✍️</div>
           <h4>Assessment Tools</h4>
           <p>Test your knowledge with interactive assessments</p>
-          <a href="#" class="service-btn">Start Assessment</a>
+         <a href="{% url 'nouapp:assessment' %}" class="service-btn">Start Assessment</a>
         </div>
       </div>
 
@@ -1473,7 +1475,7 @@
           <div class="service-icon">📈</div>
           <h4>Performance</h4>
           <p>Track your academic achievements and progress</p>
-          <a href="{% url 'studentapp:viewprofile' %}" class="service-btn">View Performance</a>
+          <a href="{% url 'nouapp:performance' %}" class="service-btn">View Performance</a>
         </div>
       </div>
 
@@ -1503,7 +1505,7 @@
   <div class="container">
     <div class="section-header">
       <h2>What Our Students Say</h2>
-      <p>Real experiences from students who have transformed their lives through NOU e-Gyan Portal</p>
+      <p>Real experiences from students who have transformed their lives through Kuniya Learning Management System</p>
     </div>
 
     <div class="testimonial-slider">
@@ -1519,7 +1521,7 @@
               <i class="fa fa-star"></i>
             </div>
             <p class="testimonial-text">
-              The NOU e-Gyan Portal has transformed my learning experience. The 24/7 access to study materials and the interactive platform make distance learning truly effective. I can study at my own pace and track my progress easily.
+              The kuniya lms has transformed my learning experience. The 24/7 access to study materials and the interactive platform make distance learning truly effective. I can study at my own pace and track my progress easily.
             </p>
             <div class="testimonial-author">
               <div class="author-image">RS</div>
@@ -1565,7 +1567,7 @@
               <i class="fa fa-star"></i>
             </div>
             <p class="testimonial-text">
-              Excellent platform with user-friendly interface. The support team is very responsive and the quality of study materials is outstanding. Highly recommend NOU e-Gyan to all distance learning students.
+              Excellent platform with user-friendly interface. The support team is very responsive and the quality of study materials is outstanding. Highly recommend kuniya lms to all distance learning students.
             </p>
             <div class="testimonial-author">
               <div class="author-image">AK</div>
@@ -1645,7 +1647,7 @@
             <i class="fa fa-phone"></i>
           </div>
           <h4>Call Us</h4>
-          <p><a href="tel:+917080102007">+91 7080102007</a></p>
+          <p><a href="tel:+917907638067">+91 7907638067</a></p>
           <p style="font-size: 0.9rem;">Available Monday - Saturday<br>9:00 AM - 6:00 PM</p>
         </div>
 
@@ -1654,7 +1656,7 @@
             <i class="fa fa-envelope"></i>
           </div>
           <h4>Email Support</h4>
-          <p><a href="mailto:nouegyanhelp@gmail.com">nouegyanhelp@gmail.com</a></p>
+          <p><a href="mailto:kuniyalms@gmail.com">kuniyalms@gmail.com</a></p>
           <p style="font-size: 0.9rem;">We respond within 24 hours</p>
         </div>
 
@@ -1700,8 +1702,8 @@
     { title: 'Student Dashboard', description: 'View your courses, progress, and academic updates', url: "{% url 'studentapp:studenthome' %}", category: 'Service' },
     { title: 'Learning Materials', description: 'Access comprehensive self-learning study resources', url: "{% url 'studentapp:viewmat' %}", category: 'Resource' },
     { title: 'e-Books Library', description: 'Browse our extensive digital book collection', url: '#', category: 'Resource' },
-    { title: 'Assessment Tools', description: 'Test your knowledge with interactive assessments', url: '#', category: 'Service' },
-    { title: 'Performance Tracking', description: 'Track your academic achievements and progress', url: "{% url 'studentapp:viewprofile' %}", category: 'Service' },
+    { title: 'Assessment Tools', description: 'Test your knowledge with interactive assessments', url: "{% url 'nouapp:assessment' %}", category: 'Service' },
+    { title: 'Performance Tracking', description: 'Track your academic achievements and progress', url: "{% url 'nouapp:performance' %}", category: 'Service' },
     { title: 'Student Feedback', description: 'Share your experience and help us improve', url: "{% url 'studentapp:response' %}", category: 'Service' },
     { title: 'Course Catalogue', description: 'Explore available courses and programs', url: "{% url 'nouapp:courses' %}", category: 'Course' },
     { title: 'Distance Learning', description: 'Transform your future with flexible online education', url: '#', category: 'Course' },
